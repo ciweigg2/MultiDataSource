@@ -12,4 +12,6 @@ public interface DataSourceMapper {
 
     List<DataSourceDO> getAllDataSources();
 
+    int insertSelective(DataSourceDO dataSourceDO);
+
 }

@@ -1,6 +1,8 @@
 package com.wbb.aop;
 
 import java.lang.reflect.Method;
+
+import com.wbb.dataSource.dynamic.DataSourceContextHolder;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -11,13 +13,14 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.wbb.annotation.DynamicRoutingDataSource;
 import com.wbb.dataSource.MultiDataSource;
 
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class HandlerDataSourceAop {
 
 	private static Logger logger = LoggerFactory.getLogger(HandlerDataSourceAop.class);
@@ -62,13 +65,14 @@ public class HandlerDataSourceAop {
 	@Before(value="pointcut()")
 	public void beforeOpt(JoinPoint joinPoint){
 		String dataSourceName = "dataSource1";
-		MultiDataSource.setDataSourceKey(dataSourceName);
+		DataSourceContextHolder.setDataSource(dataSourceName);
+//		MultiDataSource.setDataSourceKey(dataSourceName);
 		logger.info("切到"+dataSourceName+"数据库");
 	}
-	@After(value="pointcut()")
-	public void afterOpt(){
-		MultiDataSource.toDefault();
-		logger.info("切回默认数据库");
-	}
+//	@After(value="pointcut()")
+//	public void afterOpt(){
+//		MultiDataSource.toDefault();
+//		logger.info("切回默认数据库");
+//	}
 
 }

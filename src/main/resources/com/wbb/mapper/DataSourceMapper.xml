@@ -24,4 +24,14 @@
 		FROM other_datasource
 	</select>
 
+	<insert id="insertSelective" parameterType="com.wbb.bean.DataSourceDO">
+		insert into other_datasource (datasource_name ,database_ip ,database_port ,database_name ,database_username ,database_password) values
+		(#{datasourceName,jdbcType=VARCHAR} ,
+		#{databaseIp,jdbcType=VARCHAR} ,
+		#{databasePort,jdbcType=VARCHAR} ,
+		#{databaseName,jdbcType=VARCHAR} ,
+		#{username,jdbcType=VARCHAR} ,
+		#{password,jdbcType=VARCHAR})
+	</insert>
+
 </mapper>
